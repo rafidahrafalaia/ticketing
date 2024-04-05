@@ -84,16 +84,11 @@ public class AuthenticationService {
             return;
         }
 
-        validTokens.forEach(t-> {
-            t.setLoggedOut(true);
-        });
-
         tokenRepository.saveAll(validTokens);
     }
     private void saveUserToken(String jwt, User user) {
         Token token = new Token();
         token.setToken(jwt);
-        token.setLoggedOut(false);
         token.setUser(user);
         tokenRepository.save(token);
     }

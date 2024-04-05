@@ -28,21 +28,10 @@ public class EventSchedule {
     @ManyToOne
     @JoinColumn(name = "event_id")
     private Event event;
-    @NotNull
-    @OneToMany(mappedBy = "eventSchedule")
-    private List<Ticket> tickets;
 
 
     public void setEvent(Event event) {
         this.event = event;
-    }
-
-    public List<Ticket> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
     }
 
     public Integer getId() {
