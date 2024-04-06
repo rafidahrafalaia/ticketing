@@ -1,15 +1,17 @@
 package com.restApi.ticketing.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.restApi.ticketing.model.Ticket;
 
 public class TicketResponseDTO {
 
     private String code;
-    private EventScheduleResponseDTO dateTimeEvent;
+    @JsonProperty("event_schedule")
+    private EventScheduleResponseDTO eventSchedule;
 
     public TicketResponseDTO(Ticket ticket) {
         this.code = ticket.getCode();
-        this.dateTimeEvent = new EventScheduleResponseDTO(ticket.getEventSchedule());
+        this.eventSchedule = new EventScheduleResponseDTO(ticket.getEventSchedule());
     }
 
     public String getCode() {
@@ -20,11 +22,11 @@ public class TicketResponseDTO {
         this.code = code;
     }
 
-    public EventScheduleResponseDTO getDateTimeEvent() {
-        return dateTimeEvent;
+    public EventScheduleResponseDTO getEventSchedule() {
+        return eventSchedule;
     }
 
-    public void setDateTimeEvent(EventScheduleResponseDTO dateTimeEvent) {
-        this.dateTimeEvent = dateTimeEvent;
+    public void setEventSchedule(EventScheduleResponseDTO eventSchedule) {
+        this.eventSchedule = eventSchedule;
     }
 }

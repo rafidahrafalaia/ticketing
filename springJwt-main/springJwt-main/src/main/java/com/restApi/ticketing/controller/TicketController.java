@@ -4,7 +4,7 @@ import com.restApi.ticketing.dto.TicketRequestDTO;
 import com.restApi.ticketing.dto.TicketUserResponseDTO;
 import com.restApi.ticketing.model.TicketUser;
 import com.restApi.ticketing.response.exception.LimitExceededException;
-import com.restApi.ticketing.response.success.SuccessResponse;
+import com.restApi.ticketing.response.success.SuccessDetailResponse;
 import com.restApi.ticketing.service.TicketService;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import jakarta.servlet.http.HttpServlet;
@@ -32,9 +32,10 @@ public class TicketController extends HttpServlet {
     public ResponseEntity<Object> postTicket(HttpServletRequest request, @Valid @RequestBody TicketRequestDTO ticketDTO) {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
-        TicketUser ticketUser = ticketService.bookTicket(username, ticketDTO);
+        final Integer limitBook = 10;
+        TicketUser ticketUser = ticketService.bookTicket(username, ticketDTO, limitBook);
         TicketUserResponseDTO ticketUserDTO = new TicketUserResponseDTO((ticketUser));
-        SuccessResponse response = new SuccessResponse("successfully buy ticket", ticketUserDTO);
+        SuccessDetailResponse response = new SuccessDetailResponse("successfully buy ticket", ticketUserDTO);
         return new ResponseEntity<Object>(response, HttpStatus.CREATED);
     }
     @GetMapping("tickets")
@@ -43,7 +44,7 @@ public class TicketController extends HttpServlet {
         String username = (String) session.getAttribute("username");
         List<TicketUser> ticketUsers = ticketService.getAllByUser(username);
         List<Object> ticketsDTO = ticketUsers.stream().map(ticket -> new TicketUserResponseDTO(ticket)).collect(Collectors.toList());
-        SuccessResponse response = new SuccessResponse("successfully get user tickets", ticketsDTO);
+        SuccessDetailResponse response = new SuccessDetailResponse("successfully get user tickets", ticketsDTO);
         return new ResponseEntity<Object>(response, HttpStatus.ACCEPTED);
     }
     public void rateLimiterFallback(Exception e) throws LimitExceededException {

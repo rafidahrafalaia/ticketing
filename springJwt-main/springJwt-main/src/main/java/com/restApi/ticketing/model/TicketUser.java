@@ -16,7 +16,12 @@ public class TicketUser {
     @OneToOne
     @JoinColumn(name = "ticket_id")
     private Ticket ticket;
-//
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    //
     public Integer getId() {
         return id;
     }

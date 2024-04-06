@@ -17,7 +17,3 @@ resilience4j.ratelimiter:
   instances:
     orderService:
       limitForPeriod: 100
-      limitRefreshPeriod: 4s
-      timeoutDuration: 10s
-      registerHealthIndicator: true
-      eventConsumerBufferSize: 100

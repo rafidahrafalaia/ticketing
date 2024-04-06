@@ -4,7 +4,7 @@ import com.restApi.ticketing.dto.EventResponseDTO;
 import com.restApi.ticketing.model.Event;
 import com.restApi.ticketing.repository.EventRepository;
 import com.restApi.ticketing.response.success.SuccessPaginationResponse;
-import com.restApi.ticketing.response.success.SuccessResponse;
+import com.restApi.ticketing.response.success.SuccessDetailResponse;
 import com.restApi.ticketing.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -43,7 +43,7 @@ public class EventController {
         Event event = eventService.getById(id);
         EventResponseDTO eventsDTO = new EventResponseDTO(event);
 
-        SuccessResponse response = new SuccessResponse("successfully get event", eventsDTO);
+        SuccessDetailResponse response = new SuccessDetailResponse("successfully get event", eventsDTO);
 
         return new ResponseEntity<Object>(response, HttpStatus.ACCEPTED);
     }

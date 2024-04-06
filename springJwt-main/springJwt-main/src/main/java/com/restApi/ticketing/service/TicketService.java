@@ -26,7 +26,6 @@ public class TicketService extends RuntimeException {
     private final TicketUserRepository ticketUserRepository;
     private final EventScheduleRepository eventScheduleRepository;
     private final Lock lock = new ReentrantLock();
-    private final Integer limitBook = 100;
 
     public TicketService(UserRepository repository, TicketRepository ticketRepository, TicketUserRepository ticketUserRepository, EventScheduleRepository eventScheduleRepository) {
         this.userRepository = repository;
@@ -35,7 +34,7 @@ public class TicketService extends RuntimeException {
         this.eventScheduleRepository = eventScheduleRepository;
     }
 
-    private void validateLimitBook(Integer userId, Integer eventScheduleId) throws LimitExceededException {
+    private void validateLimitBook(Integer userId, Integer eventScheduleId, Integer limitBook) throws LimitExceededException {
         List<TicketUser> ticketUsers = this.ticketUserRepository.findAllByUserAndEventScheduleId(userId, eventScheduleId);
         if((long) ticketUsers.size() > limitBook) {
             throw new LimitExceededException("Transaction exceeds limit");
@@ -53,7 +52,7 @@ public class TicketService extends RuntimeException {
             throw new AccessDeniedException("User has no access for this action yet");
         }
     }
-    public TicketUser bookTicket(String username, TicketRequestDTO body)  {
+    public TicketUser bookTicket(String username, TicketRequestDTO body, Integer limitBook)  {
         lock.lock();
         try {
             User user = this.userRepository.findByUsername(username)
@@ -61,7 +60,7 @@ public class TicketService extends RuntimeException {
                     .findFirst()
                     .orElseThrow(() -> new NotFoundException("User not fount"));
 
-            this.validateLimitBook(user.getId(), body.getEventScheduleId());
+            this.validateLimitBook(user.getId(), body.getEventScheduleId(), limitBook);
             this.validateTimeSchedule(body.getEventScheduleId());
 
             Ticket ticket = this.ticketRepository.findAllAvailableTicketByDateTimeId(body.getEventScheduleId(), Status.AVAILABLE)
