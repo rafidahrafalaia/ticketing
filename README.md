@@ -1,3 +1,4 @@
+Notes: You can run query in data.sql to generate data for the database to start testing.
 # PRD
 
 ## Schema Database
