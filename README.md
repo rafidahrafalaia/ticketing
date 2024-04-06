@@ -26,6 +26,12 @@ Requset Body
   password: string
 }
 ```
+Response
+```
+{
+  message: string,
+  token: string
+}
 ### Login
 ```http
 POST localhost:8080/login
