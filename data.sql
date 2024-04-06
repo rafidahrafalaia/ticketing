@@ -26,5 +26,4 @@ INSERT INTO ticket (code, status, event_schedule_id) VALUES
 ('GSX003', 'AVAILABLE', 2),
 ('JJA001', 'AVAILABLE', 3),
 ('JJA002', 'AVAILABLE', 3),
-('JJA003', 'AVAILABLE', 3),
-('HHA001', 'AVAILABLE', 1);
+('JJA003', 'AVAILABLE', 3);
