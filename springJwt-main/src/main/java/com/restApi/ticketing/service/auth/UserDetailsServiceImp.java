@@ -1,4 +1,4 @@
-package com.restApi.ticketing.auth;
+package com.restApi.ticketing.service.auth;
 
 import com.restApi.ticketing.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
