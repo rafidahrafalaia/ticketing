@@ -1,8 +1,8 @@
 package com.restApi.ticketing.filter;
 
 
-import com.restApi.ticketing.auth.JwtService;
-import com.restApi.ticketing.auth.UserDetailsServiceImp;
+import com.restApi.ticketing.service.auth.JwtService;
+import com.restApi.ticketing.service.auth.UserDetailsServiceImp;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

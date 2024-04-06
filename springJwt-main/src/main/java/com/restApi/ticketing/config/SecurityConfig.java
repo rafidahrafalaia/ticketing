@@ -2,7 +2,7 @@ package com.restApi.ticketing.config;
 
 
 import com.restApi.ticketing.filter.JwtAuthenticationFilter;
-import com.restApi.ticketing.auth.UserDetailsServiceImp;
+import com.restApi.ticketing.service.auth.UserDetailsServiceImp;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;

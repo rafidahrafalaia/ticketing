@@ -2,7 +2,7 @@ package com.restApi.ticketing.controller;
 
 import com.restApi.ticketing.dto.AuthenticationResponseDTO;
 import com.restApi.ticketing.model.User;
-import com.restApi.ticketing.auth.AuthenticationService;
+import com.restApi.ticketing.service.auth.AuthenticationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
