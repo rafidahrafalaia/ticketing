@@ -77,7 +77,8 @@ Response
                 {
                     id: integer,
                     date: string,
-                    time: string
+                    time: string,
+                    open_to_sell: boolean
                 }
             ]
         }
@@ -114,7 +115,8 @@ Response
                 {
                     id: integer,
                     date: string,
-                    time: string
+                    time: string,
+                    open_to_sell: boolean
                 }
             ]
         }
